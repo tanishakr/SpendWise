@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --color-burnt-orange: #CA6702;
+  --color-teal: #0A9396;
+  --color-amber: #EE9B00;
+  --color-deep-red: #AE2012;
+  --color-navy: #001219;
+  --color-sand: #E9D8A6;
+  --color-bg: #FBF3E4;
+  --color-surface: #FFFFFF;
+  --color-text: var(--color-navy);
+}
+
+.dark {
+  --color-bg: #001219;
+  --color-surface: #051822;
+  --color-text: var(--color-sand);
+}
+
+@theme {
+  --color-primary: var(--color-burnt-orange);
+  --color-success: var(--color-teal);
+  --color-warning: var(--color-amber);
+  --color-danger: var(--color-deep-red);
+  --color-app-bg: var(--color-bg);
+  --color-app-surface: var(--color-surface);
+  --color-app-text: var(--color-text);
+
+  --font-display: "Baloo 2", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-app-bg);
+  color: var(--color-app-text);
+}
