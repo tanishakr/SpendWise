@@ -27,15 +27,17 @@ AI is used meaningfully across three features, not as a single gimmick API call:
 ## Tech stack
 
 **Frontend:** React (Vite), Tailwind CSS v4, React Router, Recharts, react-hot-toast
+
 **Backend:** Node.js, Express, MongoDB (Mongoose), JWT + bcrypt
+
 **AI:** Google Gemini API (`gemini-3.1-flash-lite`)
+
 **Deployment:** Vercel (frontend + backend), MongoDB Atlas
 
 ## Project structure
 
-spendwise/
-├── backend/ # Express API, MongoDB models, Gemini integration
-└── frontend/ # React app (Vite)
+- `backend/` — Express API, MongoDB models, Gemini integration
+- `frontend/` — React app (Vite)
 
 ## API overview
 
