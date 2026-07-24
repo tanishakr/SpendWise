@@ -1,75 +1,62 @@
-# React + TypeScript + Vite
+# SpendWise 💸
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal finance tracker built for Indian users — type your expenses the way you'd text a friend ("chai aur nashta 200 rupaye"), and AI handles the categorizing, insights, and budget tracking.
 
-Currently, two official plugins are available:
+**Live demo:** [spend-wise-7x4b.vercel.app](https://spend-wise-7x4b.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Why this project
 
-## React Compiler
+Most finance apps don't handle Hinglish (code-mixed Hindi-English) input at all — you either type in stiff formal English or not at all. SpendWise uses Gemini to understand natural, everyday expense notes and turns them into structured, categorized data automatically.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+AI is used meaningfully across three features, not as a single gimmick API call:
+- **Categorization** — reads a Hinglish note and assigns it to the right spending category
+- **Insights** — generates a plain-language summary of spending patterns
+- **Anomaly detection** — flags unusually high transactions compared to your own spending history
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🔐 JWT-based authentication (signup/login)
+- 💬 Chat-style expense entry with AI categorization
+- 📊 Dashboard with category breakdown, spending trend, and month-over-month comparison charts
+- 🎯 Budgets with live, color-coded progress bars (green → amber → red)
+- 📜 Searchable, filterable transaction history with inline editing
+- ✨ AI-generated plain-language spending insights
+- 🌗 Dark/light mode
+- 📱 Fully responsive, mobile-friendly layout
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tech stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+**Frontend:** React (Vite), Tailwind CSS v4, React Router, Recharts, react-hot-toast
+**Backend:** Node.js, Express, MongoDB (Mongoose), JWT + bcrypt
+**AI:** Google Gemini API (`gemini-3.1-flash-lite`)
+**Deployment:** Vercel (frontend + backend), MongoDB Atlas
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project structure
 
-```
+spendwise/
+├── backend/ # Express API, MongoDB models, Gemini integration
+└── frontend/ # React app (Vite)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## API overview
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| Method & Route | Auth | Purpose |
+|---|---|---|
+| POST /api/auth/signup | No | Create account |
+| POST /api/auth/login | No | Log in |
+| POST /api/transactions | Yes | Create expense (AI-categorized) |
+| GET /api/transactions | Yes | Get all expenses |
+| PUT /api/transactions/:id | Yes | Update an expense |
+| DELETE /api/transactions/:id | Yes | Delete an expense |
+| GET /api/insights | Yes | AI-generated spending summary |
+| POST /api/budgets | Yes | Set/update a monthly budget |
+| GET /api/budgets/:month | Yes | Get budgets with live progress |
+| DELETE /api/budgets/:id | Yes | Delete a budget |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Future scope
 
-```
+- Voice note entry (Whisper transcription)
+- Multi-language support beyond Hinglish
+- WhatsApp integration
+- Recurring expense detection
+- Export to PDF/CSV
+
